@@ -1,0 +1,2 @@
+import dataplatform
+CredentialProvider = dataplatform.credentials.CredentialProvider

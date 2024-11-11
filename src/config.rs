@@ -13,6 +13,9 @@ pub struct ClientConfig {
     project: String,
 
     #[pyo3(get, set)]
+    credentials: CredentialProvider,
+
+    #[pyo3(get, set)]
     base_url: Option<String>,
 
     #[pyo3(get, set)]
@@ -23,29 +26,35 @@ pub struct ClientConfig {
 
     #[pyo3(get, set)]
     file_transfer_timeout: Option<u64>,
-
-    #[pyo3(get, set)]
-    credentials: CredentialProvider,
 }
 
 #[pymethods]
 impl ClientConfig {
+
     #[new]
+    #[pyo3(signature = (
+        client_name,
+        project,
+        credentials
+    ))]
     pub fn new(
         client_name: String,
         project: String,
         credentials: CredentialProvider,
-        base_url: Option<String>,
-        headers: Option<HashMap<String, String>>,
-        timeout: Option<u64>,
-        file_transfer_timeout: Option<u64>,
     ) -> Self {
-        ClientConfig { client_name, project, base_url, headers, timeout, file_transfer_timeout, credentials }
+        let map: HashMap<String, String> = HashMap::new();
+        ClientConfig {
+            client_name, project, credentials,
+            base_url: Some(String::from("intellistream.ai")),
+            headers: Some(map),
+            timeout: Some(30),
+            file_transfer_timeout: Some(30),
+        }
     }
 
 }
 
-pub fn init_config_module(parent_module: &Bound<'_, PyModule>) -> PyResult<()> {
+pub fn init_module(parent_module: &Bound<'_, PyModule>) -> PyResult<()> {
     // Assuming Bound provides a method to get the Python interpreter
     let py = parent_module.py();
 

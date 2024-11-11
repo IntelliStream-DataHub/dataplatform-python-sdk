@@ -4,18 +4,17 @@ mod clients;
 mod config;
 mod credentials;
 
-#[pyfunction]
-fn hello_world() -> PyResult<String> {
-    Ok("Hello from Rust!".to_string())
-}
-
 #[pymodule]
-fn dataplatform_sdk(m: &Bound<'_, PyModule>) -> PyResult<()> {
-    m.add_function(wrap_pyfunction!(hello_world, m)?)?;
+fn dataplatform(m: &Bound<'_, PyModule>) -> PyResult<()> {
 
     // Initialize and add the 'config' submodule
-    config::init_config_module(m)?;
+    config::init_module(m)?;
+
+    // Initialize and add the 'clients' submodule
+    clients::init_module(m)?;
+
+    // Initialize and add the 'credentials' submodule
+    credentials::init_module(m)?;
 
     Ok(())
 }
-

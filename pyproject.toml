@@ -1,5 +1,5 @@
 [project]
-name = "dataplatform-sdk"
+name = "dataplatform_sdk"
 
 version = "0.0.1-dev"
 description = "IntelliStream DataHub Data Platform Python SDK"
@@ -10,7 +10,6 @@ authors = [
 license = { file = "LICENSE" }
 
 dependencies = [
-    "apiron>=8.0.0",
     "pytest",
     "pytest-mock"
 ]
@@ -19,7 +18,7 @@ classifiers = [
     "License :: OSI Approved :: Apache 2.0 License",
     "Operating System :: OS Independent",
 ]
-requires-python = ">=3.10"
+requires-python = ">=3.8"
 
 [project.urls]
 "Documentation" = "https://dataplatform-sdk-python.intellistream.ai/"
@@ -28,7 +27,6 @@ requires-python = ">=3.10"
 
 [tool.maturin]
 python-source = "python"
-module-name = "dataplatformsdk"
 # "extension-module" tells pyo3 we want to build an extension module (skips linking against libpython.so)
 features = ["pyo3/extension-module"]
 

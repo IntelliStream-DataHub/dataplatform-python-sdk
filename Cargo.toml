@@ -1,10 +1,10 @@
 [package]
-name = "dataplatformsdk"
+name = "dataplatform"
 version = "0.0.1"
 edition = "2021"
 
 [lib]
-name = "dataplatformsdk"
+name = "dataplatform"
 crate-type = ["cdylib"]  # Compile as a C-compatible dynamic library
 
 [dependencies]

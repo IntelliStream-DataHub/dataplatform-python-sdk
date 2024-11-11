@@ -14,3 +14,12 @@ impl DataPlatformClient {
         DataPlatformClient { config }
     }
 }
+
+
+pub fn init_module(parent_module: &Bound<'_, PyModule>) -> PyResult<()> {
+    let py = parent_module.py();
+    let new_module = PyModule::new_bound(py, "clients")?;
+    new_module.add_class::<DataPlatformClient>()?;
+    parent_module.add_submodule(&new_module)?;
+    Ok(())
+}
