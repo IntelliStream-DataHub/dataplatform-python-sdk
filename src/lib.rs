@@ -4,6 +4,8 @@ mod clients;
 mod config;
 mod credentials;
 
+mod dataplatform_api;
+
 #[pymodule]
 fn dataplatform(m: &Bound<'_, PyModule>) -> PyResult<()> {
 

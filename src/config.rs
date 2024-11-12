@@ -26,6 +26,7 @@ pub struct ClientConfig {
 
     #[pyo3(get, set)]
     file_transfer_timeout: Option<u64>,
+
 }
 
 #[pymethods]
@@ -35,20 +36,27 @@ impl ClientConfig {
     #[pyo3(signature = (
         client_name,
         project,
-        credentials
+        credentials,
+        base_url=None,
+        headers=None,
+        timeout=None,
+        file_transfer_timeout=None
     ))]
     pub fn new(
         client_name: String,
         project: String,
         credentials: CredentialProvider,
+        base_url: Option<String>,
+        headers: Option<HashMap<String, String>>,
+        timeout: Option<u64>,
+        file_transfer_timeout: Option<u64>,
     ) -> Self {
-        let map: HashMap<String, String> = HashMap::new();
         ClientConfig {
             client_name, project, credentials,
-            base_url: Some(String::from("intellistream.ai")),
-            headers: Some(map),
-            timeout: Some(30),
-            file_transfer_timeout: Some(30),
+            base_url: base_url.or(Some(String::from("intellistream.ai"))),
+            headers: headers.or(Some(HashMap::new())),
+            timeout: timeout.or(Some(30)),
+            file_transfer_timeout: file_transfer_timeout.or(Some(30)),
         }
     }
 

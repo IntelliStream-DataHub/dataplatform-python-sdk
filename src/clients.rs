@@ -1,17 +1,20 @@
 use pyo3::prelude::*;
 use crate::config::ClientConfig;
+use crate::dataplatform_api::time_series::TimeSeriesAPI;
 
 #[pyclass]
 pub struct DataPlatformClient {
     #[pyo3(get, set)]
     config: ClientConfig,
+    #[pyo3(get, set)]
+    time_series: TimeSeriesAPI
 }
 
 #[pymethods]
 impl DataPlatformClient {
     #[new]
     pub fn new(config: ClientConfig) -> Self {
-        DataPlatformClient { config }
+        DataPlatformClient { config, time_series: TimeSeriesAPI::new() }
     }
 }
 

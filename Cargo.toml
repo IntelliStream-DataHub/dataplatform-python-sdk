@@ -8,6 +8,11 @@ name = "dataplatform"
 crate-type = ["cdylib"]  # Compile as a C-compatible dynamic library
 
 [dependencies]
+chrono = "0.4"
+serde = { version = "1.0", features = ["derive"] }
+reqwest = {version = "0.12", features = ["blocking", "json"]}
+serde_json = "1.0"
+oauth2 = "5.0.0-rc.1"
 
 [dependencies.pyo3]
 version = "0.22.6"
