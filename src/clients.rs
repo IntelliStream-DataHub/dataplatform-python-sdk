@@ -14,7 +14,8 @@ pub struct DataPlatformClient {
 impl DataPlatformClient {
     #[new]
     pub fn new(config: ClientConfig) -> Self {
-        DataPlatformClient { config, time_series: TimeSeriesAPI::new() }
+        let time_series = TimeSeriesAPI::new();
+        DataPlatformClient { config, time_series }
     }
 }
 
